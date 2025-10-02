@@ -24,6 +24,8 @@ Minimarket POS (Point Of Sales) software writen in C++ with Qt Framework. The ma
 
 ## Compile
 * Please check [Wiki Compile](https://github.com/apinprastya/sultan/wiki/Compile)
+```sudo apt install qtbase5-dev qtbase5-private-dev```
+```sudo apt install libqt5serialport5-dev```
 
 ## Note
 Please consider to give a star when clone this repository
