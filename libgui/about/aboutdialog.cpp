@@ -29,11 +29,9 @@ AboutDialog::AboutDialog(QWidget *parent) : QDialog(parent), ui(new Ui::AboutDia
     ui->textBrowser->setOpenExternalLinks(true);
     ui->labelTitle->setText(LibG::CONSTANT::ABOUT_APP_NAME.arg(qApp->applicationVersion()));
     ui->textBrowser->setText(QStringLiteral("<center>%1 is simple POS software \
-                    <br><br>Project can be found at <br><a href=\"https://github.com/apinprastya/sultan\"> \
-                    https://github.com/apinprastya/sultan</a><br><br>\
-                    Some icons are licenced under Creative Commons Attribution 3.0 License. And downloaded from <br> \
-                    <a href=\"https://github.com/yusukekamiyamane/fugue-icons\"> \
-                    https://github.com/yusukekamiyamane/fugue-icons</a></center>").arg(LibG::CONSTANT::APP_NAME));
+                    <br><br>Project can be found at <br><a href=\"%2\"> \
+                    %3</a><br><br>\
+                    </center>").arg(LibG::CONSTANT::APP_NAME).arg(LibG::CONSTANT::REPO_LINK).arg(LibG::CONSTANT::REPO_LINK));
 }
 
 AboutDialog::~AboutDialog() { delete ui; }
