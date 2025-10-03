@@ -43,7 +43,7 @@ LoginDialog::LoginDialog(MessageBus *bus, QWidget *parent) : QDialog(parent), ui
     setWindowTitle(CONSTANT::WINDOW_TITLE.arg(tr("Login")));
     connect(ui->pushLogin, SIGNAL(clicked(bool)), SLOT(loginClicked()));
     connect(ui->pushConfig, SIGNAL(clicked(bool)), SLOT(openSetting()));
-    ui->labelVersion->setText(QString("Sultan version %1").arg(qApp->applicationVersion()));
+    ui->labelVersion->setText(QString("%1 version %2").arg(LibG::CONSTANT::APP_NAME).arg(qApp->applicationVersion()));
 }
 
 LoginDialog::~LoginDialog() { delete ui; }

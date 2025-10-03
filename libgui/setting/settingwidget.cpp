@@ -79,8 +79,8 @@ SettingWidget::SettingWidget(MessageBus *bus, QWidget *parent) : QWidget(parent)
 SettingWidget::~SettingWidget() { delete ui; }
 
 void SettingWidget::setupAppliaction() {
-    ui->lineAppName->setText(Preference::getString(SETTING::MARKET_NAME, "Sultan Minimarket"));
-    ui->plainSubName->setPlainText(Preference::getString(SETTING::MARKET_SUBNAME, "Jl. Bantul\nYogyakarta"));
+    ui->lineAppName->setText(Preference::getString(SETTING::MARKET_NAME, "Minimarket"));
+    ui->plainSubName->setPlainText(Preference::getString(SETTING::MARKET_SUBNAME, "Your Minimarket here !!!"));
 
     ui->groupBoxTax->setChecked(Preference::getBool(SETTING::USE_TAX));
     ui->lineSalesTax->setText(Preference::getString(SETTING::TAX_VALUE));
@@ -93,8 +93,8 @@ void SettingWidget::setupAppliaction() {
 
 void SettingWidget::setupLocale() {
     ui->comboApplicationLanguage->addItem("English", "en");
-    ui->comboApplicationLanguage->addItem("Bahasa Indonesia", "id");
-    GuiUtil::selectCombo(ui->comboApplicationLanguage, Preference::getString(SETTING::APPLICATION_LANGUAGE, "id"));
+   // ui->comboApplicationLanguage->addItem("Bahasa Indonesia", "id");
+    GuiUtil::selectCombo(ui->comboApplicationLanguage, Preference::getString(SETTING::APPLICATION_LANGUAGE, "en"));
     QMetaEnum meta = QMetaEnum::fromType<QLocale::Language>();
     mAllLocales = QLocale::matchingLocales(QLocale::AnyLanguage, QLocale::AnyScript, QLocale::AnyCountry);
     for (auto locale : mAllLocales)
@@ -106,9 +106,9 @@ void SettingWidget::setupLocale() {
     }
     // Fill
     setCurrentCombo(ui->comboApplicationLanguage, Preference::getString(SETTING::APPLICATION_LANGUAGE, "EN"));
-    setCurrentCombo(ui->comboLocale, Preference::getInt(SETTING::LOCALE_LANGUAGE, QLocale::Indonesian));
+    setCurrentCombo(ui->comboLocale, Preference::getInt(SETTING::LOCALE_LANGUAGE, QLocale::Sinhala));
     localeLanguageChanged();
-    setCurrentCombo(ui->comboLocaleCounty, Preference::getInt(SETTING::LOCALE_COUNTRY, QLocale::Indonesia));
+    setCurrentCombo(ui->comboLocaleCounty, Preference::getInt(SETTING::LOCALE_COUNTRY, QLocale::SriLanka));
     ui->checkSign->setChecked(Preference::getBool(SETTING::LOCALE_USE_SIGN));
     ui->lineSign->setText(Preference::getString(SETTING::LOCALE_SIGN));
     ui->lineSign->setEnabled(ui->checkSign->isChecked());
@@ -151,11 +151,11 @@ void SettingWidget::setupPrinter() {
     GuiUtil::selectCombo(ui->comboPrintCashierType, Preference::getInt(SETTING::PRINTER_CASHIER_TYPE));
     ui->comboPrintCashier->setCurrentText(Preference::getString(SETTING::PRINTER_CASHIER_NAME));
     ui->linePrintCashierDevice->setText(Preference::getString(SETTING::PRINTER_CASHIER_DEVICE));
-    ui->linePrintCashierTitle->setText(Preference::getString(SETTING::PRINTER_CASHIER_TITLE, "Sultan Minimarket"));
+    ui->linePrintCashierTitle->setText(Preference::getString(SETTING::PRINTER_CASHIER_TITLE, "Minimarket"));
     ui->plainPrintCashierSubtitle->setPlainText(
-        Preference::getString(SETTING::PRINTER_CASHIER_SUBTITLE, "Jogonalan Lor RT 2 Bantul"));
+        Preference::getString(SETTING::PRINTER_CASHIER_SUBTITLE, "Your Minimarket here !!!"));
     ui->plainPrintCashierFooter->setPlainText(
-        Preference::getString(SETTING::PRINTER_CASHIER_FOOTER, "Barang dibeli tidak dapat ditukar"));
+        Preference::getString(SETTING::PRINTER_CASHIER_FOOTER, "The item purchased cannot be exchanged. Thank you.Come again."));
     ui->spinCashierCpi10->setValue(Preference::getInt(SETTING::PRINTER_CASHIER_CPI10, 32));
     ui->spinCashierCpi12->setValue(Preference::getInt(SETTING::PRINTER_CASHIER_CPI12, 40));
     ui->checkPrintCashierCut->setChecked(Preference::getBool(SETTING::PRINTER_CASHIER_AUTOCUT));
@@ -235,7 +235,7 @@ void SettingWidget::setupCustomerDisplay() {
     if (selected >= 0)
         ui->comboCustomerDisplay->setCurrentIndex(selected);
     ui->lineWelcome1->setText(Preference::getString(SETTING::CUSDISPLAY_WELCOME1, tr("Welcome")));
-    ui->lineWelcome2->setText(Preference::getString(SETTING::CUSDISPLAY_WELCOME2, tr("to Sultan POS")));
+    ui->lineWelcome2->setText(Preference::getString(SETTING::CUSDISPLAY_WELCOME2, tr("to POS Lite")));
 }
 
 QPixmap SettingWidget::getLogo() {
@@ -350,7 +350,7 @@ void SettingWidget::printTestClicked() {
         str2.append(QString::number(counter % 10));
         counter++;
     }
-    e.cpi10()->leftText("SULTAN TEST PAGE", true)->newLine()->line();
+    e.cpi10()->leftText("TEST PAGE !!!", true)->newLine()->line();
     e.leftText("CPI 10 :", true)->newLine();
     e.leftText(str, true)->newLine()->line();
     e.cpi12()->leftText("CPI 12 :")->newLine();

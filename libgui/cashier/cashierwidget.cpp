@@ -128,9 +128,9 @@ CashierWidget::CashierWidget(LibG::MessageBus *bus, QWidget *parent)
     new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_Plus), this, SLOT(addNewItemNoBarcode()));
     new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_R), this, SLOT(refreshStock()));
     new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_E), this, SLOT(checkFixStock()));
-    ui->labelTitle->setText(Preference::getString(SETTING::MARKET_NAME, "Sultan Minimarket"));
+    ui->labelTitle->setText(Preference::getString(SETTING::MARKET_NAME, "Minimarket"));
     ui->labelSubtitle->setText(
-        GuiUtil::toHtml(Preference::getString(SETTING::MARKET_SUBNAME, "Jln. Bantul\nYogyakarta")));
+        GuiUtil::toHtml(Preference::getString(SETTING::MARKET_SUBNAME, "Your Minimarket here !!!")));
     connect(mAddItemDialog, SIGNAL(addNewItem(QVariantMap)), SLOT(addNewItem(QVariantMap)));
     auto inlineEdit = Preference::getBool(SETTING::INLINE_EDIT_QTY);
     if (inlineEdit) {
@@ -512,9 +512,9 @@ void CashierWidget::printBill(const QVariantMap &data) {
         return;
     }
     int paymentType = data["payment_type"].toInt();
-    const QString &title = Preference::getString(SETTING::PRINTER_CASHIER_TITLE, "Sultan Minimarket");
-    const QString &subtitle = Preference::getString(SETTING::PRINTER_CASHIER_SUBTITLE, "Jogonalan Lor RT 2 Bantul");
-    const QString &footer = Preference::getString(SETTING::PRINTER_CASHIER_FOOTER, "Barang dibeli tidak dapat ditukar");
+    const QString &title = Preference::getString(SETTING::PRINTER_CASHIER_TITLE, "Minimarket");
+    const QString &subtitle = Preference::getString(SETTING::PRINTER_CASHIER_SUBTITLE, "Your Minimarket here !!!");
+    const QString &footer = Preference::getString(SETTING::PRINTER_CASHIER_FOOTER, "The item purchased cannot be exchanged. Thank you.Come again.");
     bool useBarcode = Preference::getBool(SETTING::PRINTER_CASHIER_SHOW_BARCODE);
     int barcodelen = Preference::getInt(SETTING::PRINTER_CASHIER_BARCODE_LEN, 15);
     int cpi10 = Preference::getInt(SETTING::PRINTER_CASHIER_CPI10, 32);

@@ -76,8 +76,8 @@ double Preference::getDouble(const QString &key, double def) { return sInstance-
 void Preference::sync() { sInstance->mSetting->sync(); }
 
 void Preference::applyApplicationSetting() {
-    QLocale locale((QLocale::Language)Preference::getInt(SETTING::LOCALE_LANGUAGE, QLocale::Indonesian),
-                   (QLocale::Country)Preference::getInt(SETTING::LOCALE_COUNTRY, QLocale::Indonesia));
+    QLocale locale((QLocale::Language)Preference::getInt(SETTING::LOCALE_LANGUAGE, QLocale::Sinhala),
+                   (QLocale::Country)Preference::getInt(SETTING::LOCALE_COUNTRY, QLocale::SriLanka));
     QLocale::setDefault(locale);
 }
 

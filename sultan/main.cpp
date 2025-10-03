@@ -29,7 +29,7 @@ int main(int argc, char *argv[]) {
     QApplication a(argc, argv);
     QApplication::setStyle(QStyleFactory::create(QLatin1String("Fusion")));
 #endif
-    a.setApplicationName("sultan");
+    a.setApplicationName("POS Lite");
     a.setOrganizationName("lekapin");
     a.setApplicationVersion("24.11.01");
 

@@ -100,7 +100,7 @@ void CustomerCreditPaymentDialog::printData(const QVariantMap &d) {
         QMessageBox::critical(this, tr("Error"), tr("Please setting printer first"));
         return;
     }
-    const QString &title = Preference::getString(SETTING::PRINTER_CASHIER_TITLE, "Sultan Minimarket");
+    const QString &title = Preference::getString(SETTING::PRINTER_CASHIER_TITLE, "Minimarket");
     int cpi10 = Preference::getInt(SETTING::PRINTER_CASHIER_CPI10, 32);
     int cpi12 = Preference::getInt(SETTING::PRINTER_CASHIER_CPI12, 40);
 

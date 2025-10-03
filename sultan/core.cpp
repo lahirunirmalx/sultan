@@ -203,7 +203,7 @@ void Core::init() {
             mSocketManager = new SocketManager(this);
             if (!mSocketManager->listen(Preference::getInt(SETTING::APP_PORT))) {
                 mMainWindow->showRestartError(tr("Server Socket Error"),
-                                              tr("Port already in used.\nPossible another Sultan already openned"));
+                                              tr("Port already in used.\nPossible another POS lite already openned"));
 #ifdef SERVER_BUILD
                 qApp->exit(100);
 #endif

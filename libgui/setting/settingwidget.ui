@@ -1313,7 +1313,7 @@
                <item row="2" column="1">
                 <widget class="QLineEdit" name="lineWelcome2">
                  <property name="placeholderText">
-                  <string>to Sultan POS</string>
+                  <string>to POS Lite</string>
                  </property>
                 </widget>
                </item>
