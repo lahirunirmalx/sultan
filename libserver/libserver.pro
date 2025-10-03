@@ -9,7 +9,7 @@ TEMPLATE = lib
 TARGET = server
 target.path = /usr/bin
 INSTALLS += target
-
+QT += core core-private
 QT += concurrent sql
 
 CONFIG(static) {
