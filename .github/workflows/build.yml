@@ -7,7 +7,7 @@ on:
     branches: [ master, alevi ]
 
 jobs:
-  build-linux:
+  build-linux-appimage:
     runs-on: ubuntu-20.04
     
     steps:
@@ -25,7 +25,10 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y libcups2-dev libusb-1.0-0-dev libudev-dev libgl1-mesa-dev
+        sudo apt-get install -y libcups2-dev libusb-1.0-0-dev libudev-dev libgl1-mesa-dev \
+          libxcb-xinerama0 libxcb-icccm4 libxcb-image0 libxcb-keysyms1 libxcb-randr0 \
+          libxcb-render-util0 libxcb-shape0 libxcb-xfixes0 libxkbcommon-x11-0 \
+          fuse libfuse2 file
 
     - name: Create build directory
       run: mkdir -p build
@@ -40,18 +43,38 @@ jobs:
         cd build
         make -j$(nproc)
 
-    - name: Deploy Qt dependencies
+    - name: Prepare AppDir
       run: |
-        sudo apt-get install -y wget
+        mkdir -p build/AppDir/usr/bin
+        mkdir -p build/AppDir/usr/share/applications
+        mkdir -p build/AppDir/usr/share/icons/hicolor/256x256/apps
+        cp build/bin/Alevi build/AppDir/usr/bin/
+        cp linux/alevi.desktop build/AppDir/usr/share/applications/
+        cp linux/alevi.png build/AppDir/usr/share/icons/hicolor/256x256/apps/
+        cp linux/alevi.png build/AppDir/
+
+    - name: Download linuxdeployqt
+      run: |
         wget -q https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage
         chmod +x linuxdeployqt-continuous-x86_64.AppImage
-        cd build/bin
-        ../../linuxdeployqt-continuous-x86_64.AppImage Alevi -bundle-non-qt-libs -no-translations
 
-    - name: Upload artifacts
+    - name: Create AppImage
+      run: |
+        export VERSION="24.11.01"
+        ./linuxdeployqt-continuous-x86_64.AppImage build/AppDir/usr/share/applications/alevi.desktop \
+          -appimage -bundle-non-qt-libs -no-translations \
+          -extra-plugins=iconengines,platformthemes/libqgtk3.so
+
+    - name: Upload AppImage
       uses: actions/upload-artifact@v4
       with:
-        name: alevi-linux
+        name: alevi-linux-appimage
+        path: Alevi*.AppImage
+
+    - name: Upload raw binary (for debugging)
+      uses: actions/upload-artifact@v4
+      with:
+        name: alevi-linux-binary
         path: build/bin/
 
   build-windows:
@@ -87,6 +110,11 @@ jobs:
         cd build
         nmake
 
+    - name: Deploy Qt dependencies
+      run: |
+        cd build/bin
+        windeployqt --release --no-translations Alevi.exe
+
     - name: Upload artifacts
       uses: actions/upload-artifact@v4
       with:
@@ -120,6 +148,11 @@ jobs:
       run: |
         cd build
         make -j$(sysctl -n hw.ncpu)
+
+    - name: Deploy Qt dependencies
+      run: |
+        cd build/bin
+        macdeployqt Alevi.app -dmg
 
     - name: Upload artifacts
       uses: actions/upload-artifact@v4
