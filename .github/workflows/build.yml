@@ -21,12 +21,11 @@ jobs:
         host: 'linux'
         target: 'desktop'
         arch: 'gcc_64'
-        modules: 'qtserialport'
 
     - name: Install dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y libcups2-dev libusb-1.0-0-dev libudev-dev
+        sudo apt-get install -y libcups2-dev libusb-1.0-0-dev libudev-dev libqt5serialport5-dev
 
     - name: Create build directory
       run: mkdir -p build
@@ -61,7 +60,6 @@ jobs:
         host: 'windows'
         target: 'desktop'
         arch: 'win64_mingw81'
-        modules: 'qtserialport'
 
     - name: Create build directory
       run: mkdir -p build
@@ -98,7 +96,6 @@ jobs:
         host: 'mac'
         target: 'desktop'
         arch: 'clang_64'
-        modules: 'qtserialport'
 
     - name: Create build directory
       run: mkdir -p build
