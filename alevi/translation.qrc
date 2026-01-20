@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file alias="translation/libgui_id.qm">../translation/libgui_id.qm</file>
+        <file alias="translation/libserver_id.qm">../translation/libserver_id.qm</file>
+        <file alias="translation/alevi_id.qm">../translation/libgui_id.qm</file>
+    </qresource>
+</RCC>

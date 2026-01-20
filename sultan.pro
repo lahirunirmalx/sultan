@@ -13,4 +13,4 @@ CONFIG   += ordered
     }
 }
 
-SUBDIRS += sultan
+SUBDIRS += alevi
