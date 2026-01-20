@@ -235,7 +235,7 @@ void SettingWidget::setupCustomerDisplay() {
     if (selected >= 0)
         ui->comboCustomerDisplay->setCurrentIndex(selected);
     ui->lineWelcome1->setText(Preference::getString(SETTING::CUSDISPLAY_WELCOME1, tr("Welcome")));
-    ui->lineWelcome2->setText(Preference::getString(SETTING::CUSDISPLAY_WELCOME2, tr("to POS Lite")));
+    ui->lineWelcome2->setText(Preference::getString(SETTING::CUSDISPLAY_WELCOME2, tr("to Alevi")));
 }
 
 QPixmap SettingWidget::getLogo() {
