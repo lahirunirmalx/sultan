@@ -8,7 +8,7 @@ on:
 
 jobs:
   build-linux:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-20.04
     
     steps:
     - name: Checkout repository
@@ -25,7 +25,7 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y libcups2-dev libusb-1.0-0-dev libudev-dev libqt5serialport5-dev
+        sudo apt-get install -y libcups2-dev libusb-1.0-0-dev libudev-dev libgl1-mesa-dev
 
     - name: Create build directory
       run: mkdir -p build
@@ -39,6 +39,14 @@ jobs:
       run: |
         cd build
         make -j$(nproc)
+
+    - name: Deploy Qt dependencies
+      run: |
+        sudo apt-get install -y wget
+        wget -q https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage
+        chmod +x linuxdeployqt-continuous-x86_64.AppImage
+        cd build/bin
+        ../../linuxdeployqt-continuous-x86_64.AppImage Alevi -bundle-non-qt-libs -no-translations
 
     - name: Upload artifacts
       uses: actions/upload-artifact@v4
