@@ -59,22 +59,25 @@ jobs:
         version: '5.15.2'
         host: 'windows'
         target: 'desktop'
-        arch: 'win64_mingw81'
+        arch: 'win64_msvc2019_64'
+
+    - name: Setup MSVC
+      uses: ilammy/msvc-dev-cmd@v1
+      with:
+        arch: x64
 
     - name: Create build directory
       run: mkdir -p build
 
     - name: Run qmake
-      shell: cmd
       run: |
         cd build
         qmake CONFIG+=release CONFIG+=SINGLEBIN ..\sultan.pro
 
     - name: Build
-      shell: cmd
       run: |
         cd build
-        mingw32-make -j%NUMBER_OF_PROCESSORS%
+        nmake
 
     - name: Upload artifacts
       uses: actions/upload-artifact@v4
@@ -83,7 +86,7 @@ jobs:
         path: build/bin/
 
   build-macos:
-    runs-on: macos-latest
+    runs-on: macos-13
     
     steps:
     - name: Checkout repository
